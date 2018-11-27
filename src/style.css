@@ -1,0 +1,30 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  color: #ff9;
+}
+
+.twitch-tv-app {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(141deg, #0fb8ad 10%, #1fc8db 51%, #2cb5e8 75%);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.users-list {
+  width: 50vw;
+  margin-top: 10px;
+}
+
+.user-item {
+  width: 50vw;
+  height: 6vh;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 30px;
+  border: 1px solid #fff;
+}
