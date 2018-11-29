@@ -14,12 +14,12 @@
 }
 
 .users-list {
-  width: 50vw;
+  width: 70vw;
   margin-top: 10px;
 }
 
 .user-item {
-  width: 50vw;
+  width: 75vw;
   height: 6vh;
   list-style: none;
   display: flex;
