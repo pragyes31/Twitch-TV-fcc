@@ -1,4 +1,6 @@
 const url = "https://wind-bow.glitch.me/twitch-api/users/";
+const streamUrl = "https://wind-bow.glitch.me/twitch-api/streams/";
+let counter = 0;
 const users = [
   "ESL_SC2",
   "OgamingSC2",
@@ -12,18 +14,10 @@ const users = [
 const usersList = document.querySelector(".users-list");
 
 const twitchTV = {
-  populateUsers: () => {
-    console.log("123");
-    users.map(user => {
-      fetch(`${url}${user}`)
-        .then(data => data.json())
-        .then(data => twitchTV.populateUserDetails(data));
-    });
-  },
-  populateUserDetails: data => {
-    console.log(data);
+  populateUserDetails: (data, user) => {
+    console.log(counter++);
     const ulItem = document.createElement("ul");
-    ulItem.classList.add = "user-item";
+    ulItem.classList.add("user-item");
     const liImgItem = document.createElement("li");
     const imgItem = document.createElement("img");
     const liUserNameItem = document.createElement("li");
@@ -33,19 +27,34 @@ const twitchTV = {
     liImgItem.appendChild(imgItem);
     ulItem.appendChild(liUserNameItem);
     ulItem.appendChild(liLiveStatus);
-    imgItem.src = data.logo;
-    liUserNameItem.innerHTML = data.name;
     if (data.stream) {
+      imgItem.src = data.stream.channel.logo;
+      liUserNameItem.innerHTML = data.stream.channel.name;
       liLiveStatus.innerHTML = "Online";
     } else {
-      liLiveStatus.innerHTML = "Offline";
+      fetch(`${url}${user}`)
+        .then(result => result.json())
+        .then(result => {
+          imgItem.src = result.logo;
+          liUserNameItem.innerHTML = result.name;
+          liLiveStatus.innerHTML = "Offline";
+        });
     }
+  },
+  populateUsers: () => {
+    users.map(user => {
+      fetch(`${streamUrl}${user}`)
+        .then(data => data.json())
+        .then(data => twitchTV.populateUserDetails(data, user));
+    });
   }
 };
-//twitchTV.populateUsers();
+//const testing = setInterval(() => console.log("test"), 1000);
+const populateUsersTimer = setInterval(twitchTV.populateUsers(), 1000);
 
-const streamUrl = "https://wind-bow.glitch.me/twitch-api//streams/freecodecamp";
+const streamUrlTest =
+  "https://wind-bow.glitch.me/twitch-api/streams/ogamingsc2";
 
-fetch(streamUrl)
+fetch(streamUrlTest)
   .then(data => data.json())
-  .then(data => console.log(data));
+  .then(data => console.log(data.stream));

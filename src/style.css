@@ -1,12 +1,11 @@
 * {
   margin: 0px;
   padding: 0px;
-  color: #ff9;
+  color: black;
 }
 
 .twitch-tv-app {
   width: 100vw;
-  height: 100vh;
   background: linear-gradient(141deg, #0fb8ad 10%, #1fc8db 51%, #2cb5e8 75%);
   display: flex;
   align-items: center;
@@ -20,7 +19,7 @@
 
 .user-item {
   width: 75vw;
-  height: 6vh;
+  height: 10vh;
   list-style: none;
   display: flex;
   justify-content: space-around;
