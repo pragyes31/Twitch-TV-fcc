@@ -12,10 +12,10 @@ const users = [
   "noobs2ninjas"
 ];
 const usersList = document.querySelector(".users-list");
+console.log(usersList);
 
 const twitchTV = {
   populateUserDetails: (data, user) => {
-    console.log(counter++);
     const ulItem = document.createElement("ul");
     ulItem.classList.add("user-item");
     const liImgItem = document.createElement("li");
@@ -42,6 +42,9 @@ const twitchTV = {
     }
   },
   populateUsers: () => {
+    while (usersList.hasChildNodes()) {
+      usersList.removeChild(usersList.lastChild);
+    }
     users.map(user => {
       fetch(`${streamUrl}${user}`)
         .then(data => data.json())
@@ -49,9 +52,9 @@ const twitchTV = {
     });
   }
 };
+twitchTV.populateUsers();
 //const testing = setInterval(() => console.log("test"), 1000);
-const populateUsersTimer = setInterval(twitchTV.populateUsers(), 1000);
-
+const populateUsersTimer = setInterval(twitchTV.populateUsers, 10000);
 const streamUrlTest =
   "https://wind-bow.glitch.me/twitch-api/streams/ogamingsc2";
 

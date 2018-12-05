@@ -6,10 +6,10 @@
 
 .twitch-tv-app {
   width: 100vw;
-  background: linear-gradient(141deg, #0fb8ad 10%, #1fc8db 51%, #2cb5e8 75%);
   display: flex;
   align-items: center;
   flex-direction: column;
+  background: linear-gradient(141deg, #0fb8ad 10%, #1fc8db 51%, #2cb5e8 75%);
 }
 
 .users-list {
