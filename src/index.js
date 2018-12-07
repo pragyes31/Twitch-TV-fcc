@@ -53,11 +53,11 @@ const twitchTV = {
   }
 };
 twitchTV.populateUsers();
-//const testing = setInterval(() => console.log("test"), 1000);
-const populateUsersTimer = setInterval(twitchTV.populateUsers, 10000);
-const streamUrlTest =
-  "https://wind-bow.glitch.me/twitch-api/streams/ogamingsc2";
+//const testing = setInterval(() => console.log("test"), 60000);
+//const populateUsersTimer = setInterval(twitchTV.populateUsers, 10000);
+// const streamUrlTest =
+//   "https://wind-bow.glitch.me/twitch-api/streams/ogamingsc2";
 
-fetch(streamUrlTest)
-  .then(data => data.json())
-  .then(data => console.log(data.stream));
+// fetch(streamUrlTest)
+//   .then(data => data.json())
+//   .then(data => console.log(data.stream));
