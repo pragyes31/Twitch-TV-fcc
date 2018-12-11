@@ -12,7 +12,6 @@ const users = [
   "noobs2ninjas"
 ];
 const usersList = document.querySelector(".users-list");
-console.log(usersList);
 
 const twitchTV = {
   populateUserDetails: (data, user) => {
@@ -32,13 +31,23 @@ const twitchTV = {
       liUserNameItem.innerHTML = data.stream.channel.name;
       liLiveStatus.innerHTML = "Online";
     } else {
-      fetch(`${url}${user}`)
-        .then(result => result.json())
+      axios
+        .get(`${url}${user}`)
+        .then(response => {
+          if (response.status === 200) {
+            const data = response.data;
+            return data;
+          } else {
+            console.log(response.status);
+            console.log("fetch 1");
+          }
+        })
         .then(result => {
           imgItem.src = result.logo;
           liUserNameItem.innerHTML = result.name;
           liLiveStatus.innerHTML = "Offline";
-        });
+        })
+        .catch(error => console.log({ error }));
     }
   },
   populateUsers: () => {
@@ -46,18 +55,28 @@ const twitchTV = {
       usersList.removeChild(usersList.lastChild);
     }
     users.map(user => {
-      fetch(`${streamUrl}${user}`)
-        .then(data => data.json())
-        .then(data => twitchTV.populateUserDetails(data, user));
+      axios
+        .get(`${streamUrl}${user}`)
+        .then(response => {
+          console.log(response);
+          if (response.status === 200) {
+            const data = response.data;
+            return data;
+          } else {
+            console.log(response.status);
+            console.log("fetch 2");
+          }
+        })
+        .then(data => twitchTV.populateUserDetails(data, user))
+        .catch(error => console.log({ error }));
     });
   }
 };
 twitchTV.populateUsers();
 //const testing = setInterval(() => console.log("test"), 60000);
 //const populateUsersTimer = setInterval(twitchTV.populateUsers, 10000);
-// const streamUrlTest =
-//   "https://wind-bow.glitch.me/twitch-api/streams/ogamingsc2";
+const streamUrlTest =
+  "https://wind-bow.glitch.me/twitch-api/streams/ogamingsc2";
 
-// fetch(streamUrlTest)
-//   .then(data => data.json())
-//   .then(data => console.log(data.stream));
+//fetch(streamUrlTest).then(data => console.log(data));
+// .then(data => console.log(data.stream));
